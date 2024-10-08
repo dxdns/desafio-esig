@@ -1,0 +1,14 @@
+::ng-deep button[app-button] {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background .3s;
+}
+
+::ng-deep button[app-button]:hover {
+    background-color: var(--color-secondary);
+}

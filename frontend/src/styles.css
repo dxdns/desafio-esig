@@ -1,1 +1,70 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primary: #7380ec;
+    --color-primary-variant: #111e88;
+    --color-secondary: #737fecd3;
+    --color-secondary-variant: #5c6ae4d3;
+    --color-error: #ff7782;
+    --color-error-variant: rgba(255, 86, 48, 0.24);
+    --color-success: #41f1b6;
+    --color-success-variant: #2e7d3280;
+    --color-warning: #ffbb55;
+    --color-warning-variant: #ffab0029;
+    --color-info: #7d8da1;
+    --color-info-variant: #dce1eb;
+    --color-dark: #363049;
+    --color-dark-variant: #677483;
+    --color-info-dark: #7d8da1;
+    --color-info-light: #dce1eb;
+
+    --color-light: #848bc82e;
+    --color-action: #757575;
+    --color-white: #fff;
+    --color-bg: #f6f6f9;
+}
+
+[data-theme="dark"] {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-variant: #91a3b8;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --color-light-variant: #5263fa27;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0 auto;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bg-error {
+    background: var(--color-error);
+    --mdc-snackbar-container-color: var(--color-error);
+    --mat-snack-bar-button-color: var(--color-white);
+}
+
+.bg-success {
+    background: var(--color-success);
+    --mdc-snackbar-container-color: var(--color-success);
+    --mat-snack-bar-button-color: var(--color-white);
+}
+
+.text-muted {
+    color: var(--color-info-dark) !important;
+}
+
+.error {
+    color: var(--color-error);
+}
+
+a {
+    color: #318ffa;
+    text-decoration: none;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

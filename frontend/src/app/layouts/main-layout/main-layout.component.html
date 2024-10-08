@@ -1,0 +1,45 @@
+<div class="container">
+    <aside class="sidebar">
+        <div>
+            <app-logo></app-logo>
+            <button
+                aria-label="close menu"
+                (click)="closeMenu()"
+            >
+                close
+            </button>
+        </div>
+        <nav>
+            menu
+        </nav>
+    </aside>
+
+    <main>
+        <router-outlet></router-outlet>
+    </main>
+
+    <div class="right">
+        <div class="top">
+            <div>
+                <button
+                    mat-icon-button
+                    aria-label="toggle menu"
+                    (click)="toggleMenu()"
+                >
+                    toggle
+                </button>
+                <div>
+                    <div>
+                        <p>Hey, <b>Test</b></p>
+                        <small class="text-muted">Admin</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h2>Right</h2>
+        </div>
+    </div>
+
+    <footer>footer</footer>
+</div>

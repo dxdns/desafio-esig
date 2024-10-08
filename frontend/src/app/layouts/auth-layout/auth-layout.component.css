@@ -1,0 +1,76 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    min-height: 100vh;
+}
+
+aside,
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+aside > div {
+    text-align: center;
+}
+
+aside > div,
+main > div {
+    width: 50%;
+}
+
+aside {
+    position: relative;
+    background-image: url("https://images.pexels.com/photos/114979/pexels-photo-114979.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+aside svg {
+    fill: #fff;
+    height: 80px;
+    width: auto;
+}
+
+aside button {
+    color: #fff;
+}
+
+main {
+    animation: opacityFadeIn 1s;
+    background: #f3f3f3;
+}
+
+:host ::ng-deep main form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+:host ::ng-deep main a {
+    font-size: 13px;
+    color: #318ffa;
+}
+
+:host ::ng-deep main p {
+    color: #677483;
+}
+
+:host ::ng-deep main #password-visibility {
+    all: unset;
+    position: absolute;
+    right: 0;
+    transform: translateY(-30%);
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+}

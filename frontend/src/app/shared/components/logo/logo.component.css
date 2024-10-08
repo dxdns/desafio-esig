@@ -1,0 +1,15 @@
+.logo {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.logo h2 {
+    color: var(--color-dark);
+}
