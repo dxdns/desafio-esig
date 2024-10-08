@@ -6,7 +6,7 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-    transition: background .3s;
+    transition: background 0.3s;
 }
 
 ::ng-deep button[app-button]:hover {

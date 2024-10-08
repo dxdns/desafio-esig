@@ -17,7 +17,8 @@ export class AuthService {
         return this.logged.asObservable()
     }
 
-    login() {
+    login(token: string) {
+        this.cookieService.set(this.TOKEN_KEY, token, 1)
         this.logged.next(true)
     }
 
@@ -29,7 +30,7 @@ export class AuthService {
     private checkToken() {
         const token = this.getToken()
         if (token) {
-            this.login()
+            this.login(token)
         } else {
             this.logout()
         }
