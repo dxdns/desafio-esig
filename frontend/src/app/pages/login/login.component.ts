@@ -40,15 +40,12 @@ export class LoginComponent implements OnInit {
 
             this.apiService.login(email, password).subscribe(
                 (response: any) => {
-                    console.log(response)
-                    this.authService.login(response)
+                    this.authService.login(response.token)
                 },
                 (error: Error) => {
                     console.error("Login failed", error.message)
                 }
             )
-        } else {
-            console.error("form invalid")
         }
     }
 }

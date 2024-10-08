@@ -2,12 +2,13 @@
     <h1>SignUp</h1>
     <p>Already have an account? <a routerLink="/auth/login">Sign in</a></p>
 
-    <form>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <label>Email</label>
-        <input app-input type="email" />
+        <input app-input type="email" formControlName="email" />
         <label>Senha</label>
-        <input app-input type="password" />
-        <button app-button type="submit">SignUp</button>
+        <input app-input type="password" formControlName="password" />
+        <button app-button type="submit">SigIn</button>
         <p>
             By signing up, I agree to
             <a href="#">Terms of Service </a>
