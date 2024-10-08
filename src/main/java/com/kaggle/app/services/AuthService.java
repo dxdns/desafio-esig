@@ -15,6 +15,10 @@ public class AuthService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return repository.findByLogin(username);
+        var userDetails = repository.findByLogin(username);
+        if (userDetails == null) {
+            throw new UsernameNotFoundException("credentials invalid");
+        }
+        return userDetails;
     }
 }

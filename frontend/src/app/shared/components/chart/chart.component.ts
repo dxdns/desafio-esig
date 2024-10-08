@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http"
 })
 export class ChartComponent implements OnInit {
     private apiUrl = "http://localhost:8081/vaccinations"
-    selectedCountry: string = ""
+    selectedCountry: string | null = null;
 
     constructor(private http: HttpClient) {}
 
@@ -19,7 +19,7 @@ export class ChartComponent implements OnInit {
 
     fetchData(page: number = 0, size: number = 10) {
         this.http
-            .get<VaccinationData[]>(`${this.apiUrl}?page=${page}&size=${size}`)
+            .get<VaccinationData[]>(`${this.apiUrl}${this.selectedCountry? `/${this.selectedCountry}` : ""}?page=${page}&size=${size}`)
             .subscribe(
                 (data) => {
                     this.createChart(data)

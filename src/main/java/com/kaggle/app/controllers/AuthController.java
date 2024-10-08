@@ -1,6 +1,10 @@
 package com.kaggle.app.controllers;
 
+import java.util.Collections;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -26,17 +30,18 @@ public class AuthController {
     private JwtUtil jwtUtil;
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginDTO loginDto) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginDTO loginDto) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(loginDto.getUsername(),
                 loginDto.getPassword());
+                System.out.println(usernamePassword.getCredentials());
         var auth = this.authenticationManager.authenticate(usernamePassword);
         var token = jwtUtil.generateToken((UserModel) auth.getPrincipal());
-        return ResponseEntity.ok(token);
+        return ResponseEntity.ok(Collections.singletonMap("token", token));
     }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterDTO registerDto) {
         var newUser = userService.add(registerDto);
-        return ResponseEntity.ok(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
     }
 }
