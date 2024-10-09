@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container" [ngClass]="{ 'menu-toggled': showMenu }">
     <aside class="sidebar">
         <div>
             <app-logo></app-logo>
             <button aria-label="close menu" (click)="closeMenu()">close</button>
         </div>
         <nav>
-            <h2>Menu</h2>
+            <app-menu (menuClick)="closeMenu()"></app-menu>
         </nav>
     </aside>
 
@@ -17,17 +17,22 @@
         <div class="top">
             <div>
                 <button
-                    mat-icon-button
                     aria-label="toggle menu"
                     (click)="toggleMenu()"
+                    class="material-symbols-outlined"
                 >
-                    toggle
+                    menu
                 </button>
                 <div>
                     <div>
                         <p>Hey, <b>Test</b></p>
                         <small class="text-muted">Admin</small>
                     </div>
+                    <app-avatar
+                        label="test"
+                        imageSrc="https://material.angular.io/assets/img/examples/shiba1.jpg"
+                        aria-label="avatar image"
+                    ></app-avatar>
                 </div>
             </div>
         </div>

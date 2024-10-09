@@ -89,8 +89,13 @@ footer {
         display: none;
     }
 
+    :host ::ng-deep .menu span {
+        display: none;
+    }
+
     :host ::ng-deep .container.menu-toggled .logo h2,
-    :host ::ng-deep .container.menu-toggled .menu h4 {
+    :host ::ng-deep .container.menu-toggled .menu h4,
+    :host ::ng-deep .container.menu-toggled .menu span {
         display: block;
     }
 

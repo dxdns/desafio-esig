@@ -1,0 +1,25 @@
+.avatar {
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.avatar.no-image {
+    background: var(--color-light);
+}
+
+.avatar > span {
+    font-weight: bold;
+    font-size: large;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    transform: translateY(50%);
+}

@@ -16,6 +16,8 @@ import { LogoComponent } from "./shared/components/logo/logo.component"
 import { ChartComponent } from "./shared/components/chart/chart.component"
 import { AuthInterceptor } from "./shared/http-interceptors/auth.interceptor"
 import { InputComponent } from "./shared/components/input/input.component"
+import { MenuComponent } from "./shared/components/menu/menu.component"
+import { AvatarComponent } from "./shared/components/avatar/avatar.component"
 
 @NgModule({
     declarations: [
@@ -30,6 +32,8 @@ import { InputComponent } from "./shared/components/input/input.component"
         RegisterComponent,
         NotFoundComponent,
         InputComponent,
+        MenuComponent,
+        AvatarComponent,
     ],
     imports: [
         BrowserModule,

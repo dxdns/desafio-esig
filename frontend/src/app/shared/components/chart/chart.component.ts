@@ -9,7 +9,10 @@ import { HttpClient } from "@angular/common/http"
 })
 export class ChartComponent implements OnInit {
     private apiUrl = "http://localhost:8081/vaccinations"
-    selectedCountry: string | null = null;
+    countries: string[] = []
+    selectedCountries: string[] = []
+    private vaccinationData: VaccinationData[] = []
+    private filteredData: VaccinationData[] = []
 
     constructor(private http: HttpClient) {}
 
@@ -17,12 +20,18 @@ export class ChartComponent implements OnInit {
         this.fetchData()
     }
 
-    fetchData(page: number = 0, size: number = 10) {
+    fetchData(page: number = 0, size: number = 99999) {
         this.http
-            .get<VaccinationData[]>(`${this.apiUrl}${this.selectedCountry? `/${this.selectedCountry}` : ""}?page=${page}&size=${size}`)
+            .get<any>(`${this.apiUrl}?page=${page}&size=${size}`)
             .subscribe(
                 (data) => {
-                    this.createChart(data)
+                    const obj = data.content as VaccinationData[]
+                    this.vaccinationData = obj
+                    this.filteredData = obj
+                    this.createChart()
+                    this.countries = Array.from(
+                        new Set(obj.map((item) => item.country))
+                    )
                 },
                 (error) => {
                     console.error("Erro ao buscar dados:", error)
@@ -30,49 +39,98 @@ export class ChartComponent implements OnInit {
             )
     }
 
-    createChart(vaccinationData: VaccinationData[]) {
-        const countries = vaccinationData.map((item) => item.country) // Extraindo os países
-        const totalVaccinations = vaccinationData.map(
-            (item) => item.total_vaccinations
-        ) // Extraindo as vacinações totais
+    createChart() {
+        const dates = this.filteredData.map((item) => item.date)
+        const totalVaccinations = this.filteredData.map(
+            (item) => item.totalVaccinations
+        )
+        const dailyVaccinationsPerMillion = this.filteredData.map(
+            (item) => item.dailyVaccinationsPerMillion
+        )
 
-        const data = [
-            {
-                x: countries,
-                y: totalVaccinations,
-                type: "bar",
-            },
-        ]
-
-        const layout = {
-            title: `Total de Vacinações em ${this.selectedCountry}`,
-            xaxis: {
-                title: "País",
-            },
-            yaxis: {
-                title: "Total de Vacinações",
+        const totalVaccinationTrace = {
+            x: dates,
+            y: totalVaccinations,
+            type: "bar",
+            name: "Total de Vacinações",
+            opacity: 0.6,
+            marker: {
+                color: "blue",
             },
         }
 
-        Plotly.newPlot("myDiv", data as Plotly.Data[], layout)
+        const dailyVaccinationTrace = {
+            x: dates,
+            y: dailyVaccinationsPerMillion,
+            mode: "lines",
+            name: "Vacinações Diárias por Milhão",
+            line: {
+                color: "orange",
+                width: 2,
+            },
+        }
+
+        const data = [totalVaccinationTrace, dailyVaccinationTrace]
+
+        const layout: Partial<Plotly.Layout> = {
+            title: `Dados de Vacinação para ${this.selectedCountries.length > 0 ? this.selectedCountries.join(", ") : "todos os países"}`,
+            xaxis: {
+                type: "date",
+                tickformat: "%d-%m-%Y",
+            },
+            yaxis: {
+                title: "Número de Vacinações",
+                titlefont: { size: 20 },
+            },
+            legend: {
+                x: 0,
+                y: 1,
+                traceorder: "normal",
+                orientation: "h",
+            },
+        }
+
+        Plotly.newPlot("myDiv", data as any, layout)
+    }
+
+    toggleCountry(country: string) {
+        const index = this.selectedCountries.indexOf(country)
+        if (index === -1) {
+            this.selectedCountries.push(country)
+        } else {
+            this.selectedCountries.splice(index, 1)
+        }
+
+        this.filterData()
+    }
+
+    filterData() {
+        if (this.selectedCountries.length > 0) {
+            this.filteredData = this.vaccinationData.filter((item) =>
+                this.selectedCountries.includes(item.country)
+            )
+        } else {
+            this.filteredData = this.vaccinationData
+        }
+        this.createChart()
     }
 }
 
 export interface VaccinationData {
     id: number
     country: string
-    iso_code: string
+    isoCode: string
     date: string
-    total_vaccinations: number
-    people_vaccinated: number
-    people_fully_vaccinated: number
-    daily_vaccinations_raw: number
-    daily_vaccinations: number
-    total_vaccinations_per_hundred: number
-    people_vaccinated_per_hundred: number
-    people_fully_vaccinated_per_hundred: number
-    daily_vaccinations_per_million: number
+    totalVaccinations: number
+    peopleVaccinated: number
+    peopleFullyVaccinated: number
+    dailyVaccinationsRaw: number
+    dailyVaccinations: number
+    totalVaccinationsPerHundred: number
+    peopleVaccinatedPerHundred: number
+    peopleFullyVaccinatedPerHundred: number
+    dailyVaccinationsPerMillion: number
     vaccines: string
-    source_name: string
-    source_website: string
+    sourceName: string
+    sourceWebsite: string
 }

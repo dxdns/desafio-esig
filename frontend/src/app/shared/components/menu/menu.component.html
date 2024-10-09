@@ -1,0 +1,15 @@
+<ul class="menu">
+    <li *ngFor="let item of items; let i = index">
+        <a
+            [routerLink]="item.path"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="onClickItem()"
+        >
+            <span class="material-symbols-outlined">
+                {{ item.icon }}
+            </span>
+            <h4>{{ item.label }}</h4>
+        </a>
+    </li>
+</ul>

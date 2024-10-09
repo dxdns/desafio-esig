@@ -1,0 +1,6 @@
+<div class="avatar" [ngClass]="{ 'no-image': !imageSrc }">
+    <img [src]="imageSrc" *ngIf="imageSrc" [alt]="label" />
+    <span *ngIf="!imageSrc">
+        {{ label }}
+    </span>
+</div>

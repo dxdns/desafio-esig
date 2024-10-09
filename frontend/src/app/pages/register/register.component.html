@@ -2,7 +2,6 @@
     <h1>SignUp</h1>
     <p>Already have an account? <a routerLink="/auth/login">Sign in</a></p>
 
-
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <label>Email</label>
         <input app-input type="email" formControlName="email" />

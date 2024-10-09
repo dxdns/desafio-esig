@@ -38,7 +38,7 @@ export class RegisterComponent implements OnInit {
         if (this.registerForm.valid) {
             const { email, password } = this.registerForm.value
 
-            this.apiService.register({username: email, password}).subscribe(
+            this.apiService.register({ username: email, password }).subscribe(
                 (response: any) => {
                     console.log(response)
                     this.authService.login(response)
