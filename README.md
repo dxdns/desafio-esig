@@ -23,7 +23,15 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
 
 ### Backend
 
-1. Migrando os dados com docker
+1. Clone o repositório:
+    ```bash
+    git clone <URL do repositório>
+    ```
+
+2. Configure o banco de dados PostgreSQL:
+    - Crie um banco de dados e configure as credenciais no arquivo `application.properties`.
+
+3. Migrando os dados com docker
     ```bash
     docker cp src/main/resources/db/migration/[filename].sql [container_id]:/tmp/[filename].sql
     ```
@@ -34,14 +42,7 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
     psql -U myuser -d mydb -f /tmp/[filename].sql
     ```
 
-
-1. Clone o repositório:
-    ```bash
-    git clone <URL do repositório>
-    ```
-2. Configure o banco de dados PostgreSQL:
-    - Crie um banco de dados e configure as credenciais no arquivo `application.properties`.
-3. Execute o projeto:
+4. Execute o projeto:
     ```bash
     ./mvnw spring-boot:run
     ```
@@ -52,10 +53,12 @@ Siga os passos abaixo para configurar e executar o projeto localmente:
     ```bash
     cd frontend
     ```
+
 2. Instale as dependências:
     ```bash
     npm install
     ```
+
 3. Inicie o servidor de desenvolvimento:
     ```bash
     ng serve
