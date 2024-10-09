@@ -7,8 +7,15 @@
     <div class="countries">
         <label *ngFor="let country of countries">
             {{ country }}
-            <input type="checkbox" [value]="country" (change)="toggleCountry(country)" />
+            <input
+                type="checkbox"
+                [value]="country"
+                (change)="toggleCountry(country)"
+            />
         </label>
     </div>
-    <app-chart [filteredData]="filteredData" [selectedCountries]="selectedCountries"></app-chart>
+    <app-chart
+        [filteredData]="filteredData"
+        [selectedCountries]="selectedCountries"
+    ></app-chart>
 </div>

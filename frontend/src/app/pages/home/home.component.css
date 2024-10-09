@@ -8,19 +8,19 @@
 .countries {
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: 0.5rem;
     overflow-y: scroll;
     padding: 1rem;
     min-height: 100px;
 }
 
 .countries label {
-    padding: .5rem;
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
     justify-content: left;
-    gap: .5rem;
+    gap: 0.5rem;
 }
 
 .countries label:not(:last-child) {
