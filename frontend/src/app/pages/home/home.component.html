@@ -2,4 +2,13 @@
 <p>
     Daily and Total Vaccination for COVID-19 in the World from Our World in Data
 </p>
-<app-chart></app-chart>
+
+<div class="chart">
+    <div class="countries">
+        <label *ngFor="let country of countries">
+            {{ country }}
+            <input type="checkbox" [value]="country" (change)="toggleCountry(country)" />
+        </label>
+    </div>
+    <app-chart [filteredData]="filteredData" [selectedCountries]="selectedCountries"></app-chart>
+</div>
